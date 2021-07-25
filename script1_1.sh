@@ -13,3 +13,5 @@ ansible -i inventory.ini servers -b -m yum -a "name=httpd state=latest"
 
 #Enable httpd service
 ansible -i inventory.ini servers -b -m service -a "name=httpd state=started enabled=yes"
+
+#Install openjdk-8 and elasticsearch
