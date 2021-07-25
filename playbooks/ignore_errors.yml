@@ -1,0 +1,19 @@
+---
+- hosts: test2
+  become: yes
+  tasks:
+    - name: copy files
+      copy:
+        src: /tmp/errorFile
+        dest: /tmp
+      ignore_errors: yes
+    - name:    
+      user:
+        name: toto
+        state: present
+    - name:
+      shell: ps aux
+      register: output
+
+    - name:
+      debug: var=output

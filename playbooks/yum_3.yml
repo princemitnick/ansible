@@ -1,0 +1,25 @@
+---
+- hosts: master
+  become: yes
+  tasks:
+    - name: Install rpm key
+      rpm_key:
+        key: https://artifacts.elastic.co/GPG-KEY-elasticsearch
+        state: present
+
+    - name: Install elasticsearch 7.x rpm repository
+      yum_repository:
+        name: elasticsearch-7.x
+        description: Elasticsearch repository for 7.x packages
+        baseurl: https://artifacts.elastic.co/packages/7.x/yum
+        gpgcheck: true
+        gpgkey: https://artifacts.elastic.com/GPG-KEY-elasticsearch
+
+    - name: Install java & elasticsearch
+      yum:
+        name: "{{ item }}"
+        state: present
+        update_cache: true
+        loop:
+          - java-1.8.0-openjdk
+          - elasticsearch

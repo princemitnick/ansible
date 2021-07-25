@@ -1,0 +1,25 @@
+---
+- hosts: test3 test1 test2
+  tasks:
+  - name: Create user
+    block:
+      - user:
+          name: theo
+          state: present
+    rescue:
+      - debug:
+          msg: "There is a problem somewhere. Check it out"
+    always:
+      - ping:
+      
+  - name: Create a file
+    block:
+      - file:
+          path: /ts/file1.txt
+          state: touch
+    rescue:
+      - debug:
+          msg: "This path : /ts/file1.txt doesn't exist on {{ ansible_hostname}}"
+    always:
+      - ping:
+

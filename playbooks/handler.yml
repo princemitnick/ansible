@@ -1,0 +1,19 @@
+---
+- hosts: master
+  become: yes
+  tasks:
+    - name: update httpd.conf
+      replace:
+        path: /etc/httpd/conf/httpd.conf
+        regexp: '^ServerAdmin.*$'
+        replace: 'ServerAdmin cloud_user@locahost'
+        backup: yes
+      notify: "restart web server"
+  handlers:
+    - name: "restart apache"
+      service:
+        name: httpd
+        state: restarted
+      listen: "restart web server"
+
+

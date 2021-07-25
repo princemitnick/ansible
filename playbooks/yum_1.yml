@@ -1,0 +1,13 @@
+---
+- hosts: all
+  become: yes
+  tasks:
+    - name: install packages
+      yum:
+        name:
+          - httpd
+          - vsftpd
+          - vim
+          - firewalld
+        state: latest
+

@@ -1,0 +1,14 @@
+---
+- hosts: servers
+  become: yes
+  tasks:
+    - name: create a list of users
+      user:
+        name: "{{ item }}"
+        state: present
+        groups: wheel
+      when: ansible_hostname == "test1"
+      loop:
+        - violet
+        - graham
+        - bethany

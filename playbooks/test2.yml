@@ -1,0 +1,10 @@
+---
+- hosts: servers
+  tasks:
+   - name: install git package
+     yum:
+      name: git
+      state: latest
+     register: var
+   - name: display debug message
+     debug: msg="Register output {{ var }}"

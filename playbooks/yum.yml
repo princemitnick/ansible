@@ -1,0 +1,24 @@
+---
+- hosts: dbservers
+  become: yes
+  user: prince
+  tasks:
+    - name: Install mysql-server
+      yum:
+        name: mysql-server
+        state: latest
+      when: ansible_hostname == "test3" 
+      ignore_errors: yes
+
+    - name: Install php vsftpd
+      dnf:
+        name: "{{ item }}"
+        state: latest
+        update_cache: True
+      with_items:
+        - php
+        - vsftpd
+      register: var
+    
+    - name: Show messages
+      debug: msg="Register output is {{ var }}"

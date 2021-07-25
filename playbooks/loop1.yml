@@ -1,0 +1,12 @@
+---
+- hosts: servers
+  tasks:
+    - name: create file with loop
+      file:
+        path: /tmp/{{ item }}
+        state: touch
+      when: ansible_hostname == "test3"
+      with_items:
+              - file1
+              - file2
+              - file3

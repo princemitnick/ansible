@@ -1,0 +1,15 @@
+---
+- hosts: servers
+  tasks:
+    - name: create a file
+      file:
+        path: /tmp/file1.txt
+        state: touch
+      register: var
+    - name: add text in file1.txt
+      lineinfile:
+        path: /tmp/file1.txt
+        line: "The user uid is {{ var.uid }} and the user gid is {{ var.gid }}"
+    - name: display file1.txt text
+      shell:
+        args: "cat /tmp/file1.txt"

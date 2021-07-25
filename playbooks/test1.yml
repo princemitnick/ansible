@@ -1,0 +1,10 @@
+---
+- hosts : servers
+  tasks:
+  - name: create a file
+    file:
+     path: /tmp/testFile
+     state: touch
+    register: variable
+  - name: display debug message
+    debug: msg="Register output is {{ variable }}"
