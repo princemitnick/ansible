@@ -20,6 +20,6 @@
         name: "{{ item }}"
         state: present
         update_cache: true
-        loop:
-          - java-1.8.0-openjdk
-          - elasticsearch
+      loop:
+        - java-1.8.0-openjdk
+        - elasticsearch
